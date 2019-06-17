@@ -1,0 +1,265 @@
+.technician-main{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .technician-search{
+    // height: 120px;
+    background: #fff;
+  }
+}
+.technician-container{
+  flex: 1;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  padding-top: 1px;
+  overflow-y: auto;
+  // position: relative;
+  background:#f1f1f1;
+
+
+  .tec-main{
+    background: #fff;
+    margin: 15px 10px;
+    margin-top: 0;
+    box-sizing: border-box;
+  }
+
+  .tec-title{
+    text-align: center;
+    font-size: 28px;
+    color: #000;
+    line-height: 80px;
+
+    span{
+      background: #5bd0b5;
+      color: #fff;
+      border-radius: 6px;
+      padding: 4px 10px;
+    }
+  }
+
+  .tec-footer{
+    text-align: center;
+    font-size: 26px;
+    color: #666;
+    line-height: 80px;
+  }
+
+  .tec-item{
+    height: 150px;
+    width: calc(~"(100% - 75px)/4");
+    overflow: hidden;
+    margin-left: 15px;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0;
+    background: #99a4b2;
+    float: left;
+    margin-top: 15px;
+    border-radius: 6px;
+    &.item-bg1{
+      background: #99a4b2;
+    }
+    &.item-bg2{
+      background: #55bfae;
+    }
+    &.item-bg3{
+      background: #eab71c;
+    }
+    &.item-bg4{
+      background: #fa9230;
+    }
+    &.item-bg5{
+      background: #3aafff;
+    }
+    &.item-bg6{
+      background: #fd5555;
+    }
+
+    .item-top{
+      height: 50px;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      font-size: 26px;
+      color: #fff;
+      line-height: 50px;
+      position: relative;
+      >div{
+        float: left;
+        height: 100%;
+        text-align: center;
+      }
+      .item-top-left{
+        width: 28%;
+        float: left;
+      }
+      .item-top-center{
+        width: 44%;
+        float: left;
+      }
+      .item-top-right{
+        width: 28%;
+        float: left;
+        text-align: center;
+        line-height: 50px;
+        .iconfont{
+          font-size: 30px;
+          // color: #fff;
+
+        }
+        .iconfont.gengduomore12{
+          color: rgba(0, 0, 0, 0.2);
+        }
+        .iconfont.tianchongxing-{
+          color: #fff;
+        }
+      }
+    }
+
+    .item-center{
+      height: 50px;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      font-size: 30px;
+      color: #fff;
+      line-height: 50px;
+      text-align: center;
+      position: relative;
+
+      .noWork{
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        span{
+          color: rgba(0, 0, 0, 0.2);
+          font-weight: 900;
+          font-size: 40px;
+          &:first-child{
+            float: left;
+            margin-left: 10px;
+          }
+          &:last-child{
+            float: right;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+
+    .item-bottom{
+      height: 50px;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      font-size: 26px;
+      color: #fff;
+      line-height: 50px;
+      position: relative;
+      >div{
+        float: left;
+        height: 100%;
+        text-align: center;
+      }
+      .item-bottom-left{
+        width: 28%;
+        float: left;
+      }
+      .item-bottom-center{
+        float: left;
+        width: 44%;
+
+        .item-bottom-center-span{
+          width: 100%;
+          padding: 3px 0;
+          display: inline-block;
+          line-height: 30px;
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 4px;
+        }
+      }
+      .item-bottom-right{
+        width: 28%;
+        float: left;
+        text-align: center;
+        line-height: 50px;
+        .iconfont{
+          // position: absolute;
+          // right: 6px;
+          // bottom: 10px;
+          font-size: 30px;
+          color: #fff;
+          z-index: 99;
+        }
+      }
+    }
+  }
+
+  .list-item:nth-of-type(4n+0){
+    margin-right: 20px;
+  }
+
+  .tec-item-num{
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    font-size: 26px;
+    color: #fff;
+    background: #84dbb9;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .tec-item-num.success{
+    background: #84dbb9;
+  }
+  .tec-item-num.info{
+    background: #f53c4a;
+  }
+  .tec-item-num.warning{
+    background: #fc6025;
+  }
+
+
+  .tec-item .iconfont.error{
+    color: #000;
+  }
+
+
+
+  .tec-item-type{
+    width: 100%;
+    height: 43px;
+    line-height: 43px;
+    color: #fff;
+    background: #54c2a5;
+    text-align: center;
+    overflow: hidden;
+    font-size: 24px;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .tec-item-type.success{
+    background: #54c2a5;
+  }
+  .tec-item-type.info{
+    background: #989898;
+  }
+  .tec-item-type.warning{
+    background: #fcbd9a;
+  }
+
+  .tec-item-type-left{
+    float: left;
+  }
+  .tec-item-type-right{
+    float: right;
+  }
+}

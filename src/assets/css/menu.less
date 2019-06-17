@@ -1,0 +1,66 @@
+.report-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.report-main{
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+
+  .report-block{
+    margin-bottom: 20px;
+    background: #fff;
+  }
+
+  .report-content{
+    height: 175px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    .report-item{
+      width: 33.33%;
+      height: 100%;
+      text-align: center;
+      float: left;
+      box-sizing: border-box;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      &:last-child{
+        border-right: none;
+      }
+      .report-item-icon{
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          margin: 0 auto;
+          text-align: center;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          &.bg-success{
+            background: #49c6c2;
+          }
+          &.bg-info{
+            background: #329ad9;
+          }
+          &.bg-error{
+            background: #fa6c9a;
+          }
+          &.bg-warning{
+            background: #f8992b;
+          }
+          .iconfont{
+            color: #fff;
+            font-size: 46px;
+            line-height: 80px;
+          }
+      }
+
+      .report-item-text{
+        font-size: 26px;
+        color: #666;
+      }
+    }
+  }
+}
