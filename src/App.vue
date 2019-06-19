@@ -5,7 +5,7 @@
  <template>
   <div class="app_main">
     <div class="app_content">
-      <router-view></router-view>      
+      <router-view></router-view>
     </div>
     <bottomBar v-if='$route.meta.type === 1' />
   </div>
@@ -17,9 +17,10 @@ export default{
   components:{
     bottomBar,
   },
+  created() {
+
+  },
   mounted(){
-    console.log(this.$route)
-  // window.app.Toast.text('请求发生重定向，请联系工作人员');
 
   },
 }

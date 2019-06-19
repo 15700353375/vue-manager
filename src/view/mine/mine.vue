@@ -1,6 +1,5 @@
 <!--
- * @Author:      changh
- * @DateTime:    2018-12-25
+ * @DateTime:    2019
  * @Description: 我的
  -->
 <template>
@@ -38,29 +37,30 @@
             <div class='function-item'>
               有效期至
               <span class='right-vision'>2019-12-30</span>
-            </div>            
+            </div>
           </div>
         </div>
     </div>
-    
+
   </div>
 </template>
 
 
 <script>
+  import comUtil from '@Util/comUtil';
   export default {
     data(){
       return{
         userInfo: null,
-        
+
       }
     },
     created(){
-      let userInfo = localStorage.getItem('userInfo')
-      this.userInfo = JSON.parse(userInfo)
+      comUtil.getWxInfo()
     },
     mounted(){
-
+      let userInfo = localStorage.getItem('userInfo')
+      this.userInfo = JSON.parse(userInfo)
     },
     methods: {
 

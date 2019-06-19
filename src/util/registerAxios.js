@@ -9,7 +9,7 @@ import axios from 'axios'
 
 // 强制退出的操作
 function getOut () {
-  window.app.Toast.text('sessionId失效，请重新登录')
+  window.app.Toast('sessionId失效，请重新登录')
   // token失效时-强制跳转到绑定登录页面
   wx.miniProgram.reLaunch({
     url: '/pages/index/index',
@@ -34,11 +34,11 @@ function resolveSuccessRes (res) {
       // sessionId失效 通知小程序
       getOut()
     } else {
-      window.app.Toast.text(res.data.msg)
+      window.app.Toast(res.data.msg)
     }
   } else {
     // 表示网络正常，服务器拒绝
-    window.app.Toast.text(res.statusText)
+    window.app.Toast(res.statusText)
     // return res.data;
   }
 }
@@ -46,15 +46,15 @@ function resolveSuccessRes (res) {
 // 统一处理失败请求返回值
 function resolveFailRes (status) {
   if (status >= 500) {
-    window.app.Toast.text('服务器错误，请稍后重试')
+    window.app.Toast('服务器错误，请稍后重试')
   } else if (status >= 400 && status < 500) {
     if (status == 404) {
-      window.app.Toast.text('网络错误，请稍后重试')
+      window.app.Toast('网络错误，请稍后重试')
     } else {
-      window.app.Toast.text('客户端错误，请联系工作人员')
+      window.app.Toast('客户端错误，请联系工作人员')
     }
   } else if (status >= 300 && status < 400) {
-    window.app.Toast.text('请求发生重定向，请联系工作人员')
+    window.app.Toast('请求发生重定向，请联系工作人员')
   }
 }
 

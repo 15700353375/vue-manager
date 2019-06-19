@@ -1,9 +1,9 @@
 <!--
- * @DateTime:    2018-12-25
- * @Description: 报表决策
+ * @DateTime:    2019
+ * @Description: 会员
  -->
 <template>
-  <div class="clearfix menber-container">
+  <div class="clearfix menber-container"  ref='wrapper'>
     <div class="member-search">
       <div class="menber-search-main">
         <div class="search-label" v-clickoutside>
@@ -22,7 +22,7 @@
                   姓名
                 </cell-box>
               </group>
-            </div>            
+            </div>
           </div>
         </div>
         <input type="text" v-model='inputVal'>
@@ -107,7 +107,6 @@
       }
     },
     mounted(){
-      
     },
     methods: {
       // 搜索类型
@@ -133,7 +132,7 @@
           this.list = _.filter(this.AllList, ['id', this.inputVal])
           return
         }
-        
+
       }
 
     },

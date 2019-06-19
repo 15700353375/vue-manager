@@ -1,6 +1,6 @@
 <!--
- * @DateTime:    2018-12-25
- * @Description: 报表决策
+ * @DateTime:    2019
+ * @Description: 菜单
  -->
 <template>
   <div class="clearfix report-container">
@@ -35,9 +35,6 @@
     display: flex;
     flex-direction: column;
   }
-
-
-
 </style>
 
 <script>
@@ -48,8 +45,6 @@
       }
     },
     mounted(){
-
-      // window.app.Toast.text('请求发生重定向，请联系工作人员');
 
     },
     methods: {

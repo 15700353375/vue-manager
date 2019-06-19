@@ -33,6 +33,43 @@ export default {
     if (!data) return 0
     // if (data > 1) return 1
     return parseFloat((Number(data) * 100).toFixed(2))
+  },
+
+  getWxInfo () {
+    let current = app.$route.query.current
+    let userInfo = app.$route.query.userInfo
+
+  // 测试数据
+    // let current = {
+    //   'holderId': '1',
+    //   'wxRoleType': '1',
+    //   'storeName': '千思三只眼',
+    //   'holderType': '1',
+    //   'holdGroup': '1',
+    //   'address': '成都市武侯区复城国际T4#1603',
+    //   'fphone': '0825-12345678',
+    //   'dzVipCardSupportFlag': 0,
+    //   'sessionId': '3909a83033c6421e86133ea4325c6bf9'
+    // }
+    // let userInfo = {
+    //   'nickName': '午後’品茶',
+    //   'gender': 2,
+    //   'language': 'zh_CN',
+    //   'city': 'Florida',
+    //   'province': 'Sichuan',
+    //   'country': 'China',
+    //   'avatarUrl': 'https://wx.qlogo.cn/mmopen/vi_32/nGTVF9QVb73vkuLaiak0ib4ZdIqqfcOlb26tgwKcOAQhkiaKj5kBNGhmZR522I4BYP9iaH5RJod9GPBcrul8eAHnlg/132'
+    // }
+  // let current = {"holderId":"100","wxRoleType":"1","storeName":"千思","holderType":"1","holdGroup":"2","address":"成都市武侯区复城国际T4#1603","fphone":"0825-12345678","sessionId":"9294b9087de24f2693a822d8787f05d5"}
+  // let userInfo = {"nickName":"俊俊","gender":1,"language":"en","city":"Kwong","province":"Sichuan","country":"China","avatarUrl":"https://wx.qlogo.cn/mmopen/vi_32/siaiaSLcF9HHrO392axMCicKaw8Gp6rmRzxAo89bjN4taBBP9nUQDfXlRy1SKtjIflyxiattT8hK9N4ltjfdqTXNSQ/132"}
+    // current = JSON.stringify(current)
+    // userInfo = JSON.stringify(userInfo)
+
+    console.log(current, userInfo)
+    if (current && userInfo) {
+      localStorage.setItem('currentInfo', current)
+      localStorage.setItem('userInfo', userInfo)
+    }
   }
 
 }
