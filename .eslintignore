@@ -1,0 +1,9 @@
+/build/
+/config/
+/dist/
+/*.js
+/test/unit/coverage/
+/src/util/chat/
+/node_modules/
+/static/
+/docs/

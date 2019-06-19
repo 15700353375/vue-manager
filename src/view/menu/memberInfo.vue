@@ -37,7 +37,7 @@
     <div class="member-list">
       <div class="member-item" v-for="(item,index) in list" :key='index'>
         <div class="item-top">
-          <img src="@Src/assets/img/11.jpg" alt="">
+          <img src="agentStatic/img/11.jpg" alt="">
           <div class="item-top-right">
             <span class="item-type">{{item.type}}</span>
             <div class="item-tit">{{item.title}}</div>
@@ -60,48 +60,54 @@
         currentSearchType: '手机号',
         inputVal: '',
 
-        list:[
+        AllList:[
           {
+            id: 1,
             type: '会员卡',
             title: 'vip3424355',
             name: '张老板',
-            phone: '16666666',
+            phone: '6666',
             money: '￥856.36'
           },
           {
+            id: 2,
             type: '会员卡',
             title: 'vip3424355',
-            name: '张老板',
-            phone: '16666666',
+            name: '李老板',
+            phone: '8888',
             money: '￥856.36'
           },
           {
+            id: 3,
             type: '会员卡',
             title: 'vip3424355',
-            name: '张老板',
-            phone: '16666666',
+            name: '林老板',
+            phone: '9999',
             money: '￥856.36'
           },
           {
+            id: 4,
             type: '会员卡',
             title: 'vip3424355',
-            name: '张老板',
-            phone: '16666666',
+            name: '梅老板',
+            phone: '6666',
             money: '￥856.36'
           },
           {
+            id: 5,
             type: '会员卡',
             title: 'vip3424355',
-            name: '张老板',
-            phone: '16666666',
+            name: '陈老板',
+            phone: '8888',
             money: '￥856.36'
           }
-        ]
+        ],
+        list: []
+
       }
     },
     mounted(){
-
-    
+      
     },
     methods: {
       // 搜索类型
@@ -114,6 +120,20 @@
           this.bottomToast('请输入搜索内容')
           return
         }
+
+        if(this.currentSearchType == '手机号'){
+          this.list = _.filter(this.AllList, ['phone', this.inputVal])
+          return
+        }
+        if(this.currentSearchType == '姓名'){
+          this.list = _.filter(this.AllList, ['name', this.inputVal])
+          return
+        }
+        if(this.currentSearchType == '卡号'){
+          this.list = _.filter(this.AllList, ['id', this.inputVal])
+          return
+        }
+        
       }
 
     },

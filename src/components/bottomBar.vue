@@ -81,6 +81,4 @@
       }
     }
   
-  </script>
-  
-  
+  </script>  

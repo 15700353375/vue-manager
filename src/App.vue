@@ -2,7 +2,7 @@
  * @DateTime:    2019
  * @Description: 路由跳转
  -->
-<template>
+ <template>
   <div class="app_main">
     <div class="app_content">
       <router-view></router-view>      

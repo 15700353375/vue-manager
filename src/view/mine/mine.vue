@@ -22,7 +22,7 @@
 
           <div class='funciton-content'>
             <div class='function-item'>
-              最大面单
+              最大免单
               <span class='right-vision'>0元</span>
             </div>
             <div class='function-item'>
@@ -30,18 +30,6 @@
               <span class='right-vision'>100%</span>
             </div>
           </div>
-<!-- 
-          <div class='funciton-content'>
-            <div class='function-item'>
-              在线登录授权
-              <span class='right-vision'>未开放</span>
-            </div>
-            <div class='function-item'>
-              涨钟宝报警
-              <span class='iconfont icon-jiantou'></span>
-            </div>
-          </div> -->
-
           <div class='funciton-content'>
             <!-- <div class='function-item'>
               有效期至

@@ -9,8 +9,13 @@ const technician = r => require.ensure([], () => r(require('@Src/view/technician
 const menu = r => require.ensure([], () => r(require('@Src/view/menu/menu')), 'menu')
 const mine = r => require.ensure([], () => r(require('@Src/view/mine/mine')), 'mine')
 const memberInfo = r => require.ensure([], () => r(require('@Src/view/menu/memberInfo')), 'memberInfo')
+const test = r => require.ensure([], () => r(require('@Src/view/test')), 'test')
 
 export default [
+  {
+    path: '/',
+    redirect: '/mine'
+  },
   {
     path: '/room',
     name: 'room',
@@ -53,6 +58,14 @@ export default [
     component: memberInfo,
     meta: {
       title: '会员信息'
+    }
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: test,
+    meta: {
+      title: '测试'
     }
   }
 ]

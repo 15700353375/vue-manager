@@ -10,7 +10,7 @@
           <div class="img-box">
             <div v-if='currentObj && currentObj.number'>
               <div class="info-top">
-                <img src="@Src/assets/img/11.jpg" alt="">
+                <img src="agentStatic/img/11.jpg" alt="">
               </div>
               <div class="info-title">{{currentObj.number}}</div>
               <div class="info-name">
@@ -84,5 +84,3 @@
     }
   
   </script>
-  
-  

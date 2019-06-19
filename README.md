@@ -1,29 +1,21 @@
-# vue-manager
+2019-03-13
+1、授权页图标修改
+2、首页为空时添加无数据图标
+3、技师状态页面添加标题背景色以及文字
+4、营业数据-会员卡信息金额百分比都展示（我这边无数据，请检测一下会员卡信息数据是否正确）
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+打包注意
+1、注意api路径
+2、注意 小程序传过来的信息
+3、注意font地址
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Run your tests
-```
-npm run test
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+2019-03-25
+1、处理房间状态图片未显示问题
+2、营业信息页面数据格式化
+3、时间筛选 处理后台返回格式不正确问题
+4、处理提示样式不规范问题
+5、处理技师页面名称和数据不一致问题
+6、隐藏报表决策
