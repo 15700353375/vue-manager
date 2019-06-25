@@ -6,7 +6,7 @@
   position: relative;
   // display: flex;
   flex-direction: column;
-  background: #eff0f5;
+  background: #acb7f1;
   .select-main{
     height: 72px;
     width: 100%;
@@ -36,6 +36,28 @@
     .custom_input{
       flex: 1;
       position: relative;
+      .vs__dropdown-menu{
+        z-index: 9999!important;
+      }
+      .v-select{
+        width: 50%;
+        float: left;
+        font-size: 36px;
+        ul{
+          // position: absolute!important;
+          // z-index: 9999!important;
+          // display: block!important;
+        }
+        
+        input{
+          font-size: 36px;
+        }
+        .vs__actions{
+          .vs__clear{
+            display: none;
+          }
+        }
+      }
     }
     .simulate_input{
       width: 48%;
@@ -284,7 +306,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 999;
+        z-index: 20;
         width: 100%;
         height: 100%;
       }

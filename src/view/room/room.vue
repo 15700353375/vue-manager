@@ -9,20 +9,14 @@
 <div class='room-container'>
   <div class='clearfix select-main'>
     <div class="custom_input">
-      <div class="simulate_input" id='singleLinePicker' @click="selectClick1">
-        {{selectValue1}}
-        <span class='iconfont icon-xiala'></span>
-      </div>
-      <div class="simulate_input" id='singleLinePicker2' @click="selectClick2">
-        {{selectValue2}}
-        <span class='iconfont icon-xiala'></span>
-      </div>
+      <v-select v-model="select1" :options="selectArray"></v-select>
+      <v-select v-model="select2" :options="selectArray2"></v-select>
     </div>
   </div>
 
   <div class="room-container_main">
     <div class='clearfix list-main' v-if="listData && listData.length">
-      <div class='list-item' v-for='(item,index) in listData' :key='index'>
+      <div class='list-item' v-for='(item,index) in listData' :key='index' @click='operItem(item)'>
 
         <!-- 顶部 -->
         <div v-if="dealClass(item.roomStatus,item)" class='list-item-top' :class="dealClass(item.roomStatus, item) ? 'active'+(item.roomOrder.billBatch%10) : ''">
@@ -120,6 +114,15 @@
       <img class="noDate_img" src="agentStatic/img/wushuju.png" alt="">
     </div>
   </div>
+
+
+  <actionsheet v-model="isShowPop"
+    :menus="menus"
+    :close-on-clicking-mask="true"
+    @on-click-mask="closePop"
+    @on-click-menu='showModal'>
+    <!-- <p slot="header">技师{{operObj.number || ''}}操作列表</p> -->
+  </actionsheet>
 </div>
 
 </template>
@@ -136,13 +139,13 @@
         comUtil: comUtil,
         // roomType 1 浴足房间；2 棋牌房间
         selectArray: [{
-            value: "0",
+            value: 0,
             label: "全部"
           }, {
-            value: "1",
+            value: 1,
             label: "浴足房间"
           }, {
-            value: "2",
+            value: 2,
             label: "棋牌房间"
           },
         ],
@@ -156,61 +159,66 @@
         // 11:房间暂停
         selectArray2: [
           {
-            value: "0",
+            value: 0,
             label: "全部"
           }, {
-            value: "1",
+            value: 1,
             label: "停用"
           }, {
-            value: "2",
+            value: 2,
             label: "空闲中"
           }, {
-            value: "5",
+            value: 5,
             label: "使用中"
           }, {
-            value: "8",
+            value: 8,
             label: "已买单未离开"
           }, {
-            value: "9",
+            value: 9,
             label: "需要打扫"
           },
           {
-            value: "10",
+            value: 10,
             label: "已预约"
           },
           {
-            value: "11",
+            value: 11,
             label: "房间暂停"
           }
         ],
 
-        select1: '0',
-        select2: '0',
+        select1: {
+            value: 0,
+            label: "全部"
+          },
+        select2:  {
+            value: 0,
+            label: "全部"
+          },
 
         listData:[],
 
-        miniRefresh: null,
+        isInfoShow: false,
+        isShowPop: false,
+        menus: {
+          menu1: '技师信息',
+        },
 
       }
     },
     computed: {
 
-      selectValue1(){
-        return this.selectArray[Number(this.select1)].label
-      },
-
-      selectValue2(){
-        let select2 = this.select2
-        let obj = _.find(this.selectArray2, function(o) { return o.value == select2 })
-        return obj.label
-      }
-
     },
     watch:{
+      select1(newVal,oldVal){
+        this.changeSelect()
+      },
+      select2(newVal,oldVal){
+        this.changeSelect()
+      },
       currentData(newVal,oldVal){
         if(newVal == 1){
-          this.select1 = '0';
-          this.select2 = '0';
+          this.selectRefresh()
           this.getRoomList();
         }
       }
@@ -225,49 +233,31 @@
 
     },
     methods: {
+      // select更新
+      selectRefresh(){
+        this.select1 = {
+            value: 0,
+            label: "全部"
+          }
+        this.select2 = {
+            value: 0,
+            label: "全部"
+          }
+      },
       // 筛选
       changeSelect(){
-        let select1 = Number(this.select1);
-        let select2 = Number(this.select2);
+        if(!this.allData || !this.allData.length) return
+        let select1 = this.select1.value
+        let select2 = this.select2.value
         if(select1 && !select2){
-          this.listData =  _.filter(this.allData, { 'roomType': this.select1 });
+          this.listData =  _.filter(this.allData, { 'roomType': this.select1.value.toString() });
         }else if(select1 && select2){
-          this.listData =  _.filter(this.allData, { 'roomType': this.select1, 'roomStatus': this.select2});
+          this.listData =  _.filter(this.allData, { 'roomType': this.select1.value.toString(), 'roomStatus': this.select2.value.toString()});
         }else if(!select1 && select2){
-          this.listData =  _.filter(this.allData, { 'roomStatus': this.select2});
+          this.listData =  _.filter(this.allData, { 'roomStatus': this.select2.value.toString()});
         }else{
           this.listData = comUtil.clone(this.allData)
         }
-      },
-
-      // 下拉筛选
-      selectClick1(){
-        // 单列picker
-        let that = this
-        weui.picker(this.selectArray, {
-          className: 'custom-classname',
-          container: 'body',
-          // defaultValue: [3],
-          onConfirm: function (result) {
-              that.select1 = result[0].value
-              that.changeSelect()
-          },
-          id: 'singleLinePicker'
-        });
-      },
-      selectClick2(){
-        // 单列picker
-        let that = this
-        weui.picker(this.selectArray2, {
-          className: 'custom-classname',
-          container: 'body',
-          // defaultValue: [3],
-          onConfirm: function (result) {
-              that.select2 = result[0].value
-              that.changeSelect()
-          },
-          id: 'singleLinePicker2'
-        });
       },
 
       // 获取技师列表
@@ -283,9 +273,7 @@
             this.listData = comUtil.clone(this.allData)
           }
           // 重置
-          this.miniRefresh.endDownLoading();
-          this.select1 = '0';
-          this.select2 = '0';
+          this.selectRefresh()
         })
       },
 
@@ -356,6 +344,21 @@
         } else{
           return '';
         }
+      },
+
+      // 单独点击时
+      operItem(item){
+        // console.log(item)
+        // this.operObj = item
+        this.isShowPop = true
+      },
+
+      showModal(){
+        this.isInfoShow = true
+      },
+
+      closePop(){
+        this.isShowPop = false
       }
 
     },
