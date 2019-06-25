@@ -117,11 +117,11 @@
 
 
   <actionsheet v-model="isShowPop"
-    :menus="menus"
+    :menus="operObj.roomStatus == 2 ? menus : menus2"
     :close-on-clicking-mask="true"
     @on-click-mask="closePop"
     @on-click-menu='showModal'>
-    <!-- <p slot="header">技师{{operObj.number || ''}}操作列表</p> -->
+    <p slot="header">{{operObj.roomName || ''}}房间操作列表</p>
   </actionsheet>
 </div>
 
@@ -198,10 +198,24 @@
 
         listData:[],
 
-        isInfoShow: false,
         isShowPop: false,
+
+        operObj: {
+          roomName: '',
+          roomStatus: null
+        },
+        // 未开房
         menus: {
-          menu1: '技师信息',
+          // menu1: '预约',
+          menu2: '开房',
+        },
+        // 已开房
+        menus2: {
+          menu1: '安排技师',
+          menu2: '商品点单',
+          menu3: '显示详情',
+          menu4: '备注',
+          menu5: '结账',
         },
 
       }
@@ -349,16 +363,18 @@
       // 单独点击时
       operItem(item){
         // console.log(item)
-        // this.operObj = item
+        this.operObj = item
         this.isShowPop = true
       },
 
       showModal(){
-        this.isInfoShow = true
+        this.$router.push({name: 'getRoom'})
       },
 
-      closePop(){
+      closePop(){     
+         
         this.isShowPop = false
+        
       }
 
     },

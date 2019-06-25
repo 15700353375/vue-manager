@@ -10,6 +10,7 @@ const menu = r => require.ensure([], () => r(require('@Src/view/menu/menu')), 'm
 const mine = r => require.ensure([], () => r(require('@Src/view/mine/mine')), 'mine')
 const memberInfo = r => require.ensure([], () => r(require('@Src/view/menu/memberInfo')), 'memberInfo')
 const test = r => require.ensure([], () => r(require('@Src/view/test')), 'test')
+const getRoom = r => require.ensure([], () => r(require('@Src/view/room/getRoom')), 'getRoom')
 
 export default [
   {
@@ -24,14 +25,13 @@ export default [
       title: '房间列表',
       type: 1
     }
-  },
+  },  
   {
     path: '/technician',
     name: 'technician',
     component: technician,
     meta: {
-      title: '技师列表',
-      type: 1
+      title: '技师列表'
     }
   },
   {
@@ -58,6 +58,15 @@ export default [
     component: memberInfo,
     meta: {
       title: '会员信息'
+    }
+  },
+  {
+    path: '/getRoom',
+    name: 'getRoom',
+    component: getRoom,
+    meta: {
+      title: '开房',
+      type: 1
     }
   },
   {

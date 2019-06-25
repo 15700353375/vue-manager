@@ -49,7 +49,7 @@ export default {
       'address': '成都市武侯区复城国际T4#1603',
       'fphone': '0825-12345678',
       'dzVipCardSupportFlag': 0,
-      'sessionId': '734b52cf214943f3bdef84439737ac49'
+      'sessionId': '706340054a014344ba77dac2db45b2f3'
     }
     let userInfo = {
       'nickName': '午後’品茶',

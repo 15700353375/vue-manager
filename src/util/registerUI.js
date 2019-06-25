@@ -17,7 +17,11 @@ import {
   PopupRadio,
   Actionsheet,
   XSwitch,
-  XButton
+  XButton,
+  XNumber,
+  XTextarea,
+  Datetime,
+  InlineXNumber 
 } from 'vux'
 
 export function regeisterElementUI () {
@@ -37,7 +41,11 @@ export function regeisterElementUI () {
     PopupRadio,
     Actionsheet,
     XSwitch,
-    XButton 
+    XButton,
+    XNumber,
+    XTextarea,
+    Datetime,
+    InlineXNumber 
   ]
   components.map(item => {
     Vue.component(item.name, item)
