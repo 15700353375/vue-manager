@@ -43,44 +43,37 @@
         </x-dialog>
       </div>
   </div>
-  </template>
-  
-  <style lang="less" scoped>
+</template>
 
-  </style>
-  
-  
-  
-  <script>
-  
-    export default {
-      props: ['operObj'],
-      data() {
-        return {
-          isShow: true,
+<script>
+export default {
+  props: ['operObj'],
+  data() {
+    return {
+      isShow: true,
 
-          currentObj: {
-            number: '1',
-            name: '2',
-            sex: '1'
-          }
-        }
-      },
-      mounted(){
-        this.currentObj = JSON.parse(JSON.stringify(this.operObj))
-        console.log(this.operObj)
-      },
-
-      methods: {
-        close(){
-          this.isShow = false
-          this.$emit('dialogClose')
-        }
-  
-      },
-      components: {
-  
+      currentObj: {
+        number: '1',
+        name: '2',
+        sex: '1'
       }
     }
-  
-  </script>
+  },
+  mounted(){
+    this.currentObj = JSON.parse(JSON.stringify(this.operObj))
+    console.log(this.operObj)
+  },
+
+  methods: {
+    close(){
+      this.isShow = false
+      this.$emit('dialogClose')
+    }
+
+  },
+  components: {
+
+  }
+}
+
+</script>

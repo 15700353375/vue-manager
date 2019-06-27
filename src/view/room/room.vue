@@ -207,11 +207,11 @@
         // 未开房
         menus: {
           // menu1: '预约',
-          menu2: '开房',
+          getRoom: '开房',
         },
         // 已开房
         menus2: {
-          menu1: '安排技师',
+          planTechnician: '安排技师',
           menu2: '商品点单',
           menu3: '显示详情',
           menu4: '备注',
@@ -362,13 +362,14 @@
 
       // 单独点击时
       operItem(item){
-        // console.log(item)
+        console.log(item)
         this.operObj = item
         this.isShowPop = true
       },
 
-      showModal(){
-        this.$router.push({name: 'getRoom'})
+      showModal(e){
+        this.$router.push({name: e, query: {id: this.operObj.roomId}})
+        // planTechnician
       },
 
       closePop(){     

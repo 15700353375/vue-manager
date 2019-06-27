@@ -11,6 +11,7 @@ const mine = r => require.ensure([], () => r(require('@Src/view/mine/mine')), 'm
 const memberInfo = r => require.ensure([], () => r(require('@Src/view/menu/memberInfo')), 'memberInfo')
 const test = r => require.ensure([], () => r(require('@Src/view/test')), 'test')
 const getRoom = r => require.ensure([], () => r(require('@Src/view/room/getRoom')), 'getRoom')
+const planTechnician = r => require.ensure([], () => r(require('@Src/view/room/planTechnician')), 'planTechnician')
 
 export default [
   {
@@ -31,7 +32,8 @@ export default [
     name: 'technician',
     component: technician,
     meta: {
-      title: '技师列表'
+      title: '技师列表',
+      type: 1
     }
   },
   {
@@ -65,8 +67,15 @@ export default [
     name: 'getRoom',
     component: getRoom,
     meta: {
-      title: '开房',
-      type: 1
+      title: '开房'
+    }
+  },
+  {
+    path: '/planTechnician',
+    name: 'planTechnician',
+    component: planTechnician,
+    meta: {
+      title: '安排技师'
     }
   },
   {
