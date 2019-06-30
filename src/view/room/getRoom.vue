@@ -4,21 +4,27 @@
  -->
  <template>
   <div class="clearfix get-room-container"  ref='wrapper'>
-    <group  label-width="5.5em" label-margin-right="2em" label-align="justify">
-      <x-input title="包厢名称" v-model="username"></x-input>
-      <datetime title="开台时间" v-model="timer" format="YYYY-MM-DD HH:mm" value-text-align="left"></datetime>
-      <!-- <datetime v-model="hourListValue" format="YYYY-MM-DD HH:mm" :hour-list="['09', '10', '11', '12', '13', '14', '15', '16']" :minute-list="['00', '15', '30', '45']" @on-change="change" :title="$t('Birthday')"></datetime> -->
-      <x-number title="人数" align="left" v-model="numberValue" :min="1" :max="100"></x-number>
-      <group class="addNumber">
-        <x-input title="添加手牌" v-model="number">        
-        </x-input>
-        <button>添加</button>
-      </group>
-      <!-- <inline-x-number width="50px" title="人数" align="left" v-model="numberValue" button-style="round" :min="1" :max="100"></inline-x-number> -->
-      <x-textarea title="备注信息" placeholder="请详细描述你的问题" :show-counter="false" :rows="3"></x-textarea>
+    <group  label-width="5em" label-margin-right="2em" label-align="justify">
+      <x-input title="包厢名称:" v-model="username"></x-input>
+      <!-- <datetime title="开台时间:" v-model="timer" format="YYYY-MM-DD HH:mm" value-text-align="left"></datetime> -->
+      <datetime v-model="timer" format="YYYY-MM-DD HH:mm" :minute-list="['00', '15', '30', '45']" @on-change="change" title="开台时间:"></datetime>
+      <x-number title="人数:" align="left" v-model="numberValue" :min="1" :max="100"></x-number>      
     </group>
 
-    <x-button class='oper' type="primary" @click.native='open'>确认开房</x-button>
+    <group class="addNumber" label-width="5em" label-margin-right="2em" label-align="justify">
+      <x-input title="添加手牌:" v-model="number">        
+      </x-input>
+      <button>添加</button>
+    </group>
+      <!-- <inline-x-number width="50px" title="人数" align="left" v-model="numberValue" button-style="round" :min="1" :max="100"></inline-x-number> -->
+
+    <group title="备注信息">
+      <x-textarea :max="200" name="detail" placeholder="请详细描述你的问题" :show-counter="false"></x-textarea>
+    </group>
+
+    <div class='oper'>
+        <x-button type="primary" @click.native='open'>确认开房</x-button>
+    </div>
   </div>
 </template>
 
@@ -29,7 +35,9 @@
         username: '',
         numberValue: 1,
         timer: '',
-        number: ''
+        number: '',
+
+        roomType: 1, //1为棋牌 2为其它
       }
     },
     mounted(){

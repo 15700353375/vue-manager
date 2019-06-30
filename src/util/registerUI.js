@@ -22,7 +22,9 @@ import {
   XTextarea,
   Datetime,
   InlineXNumber,
-  Checklist 
+  Checklist,
+  Popup,
+  Alert
 } from 'vux'
 
 export function regeisterElementUI () {
@@ -47,7 +49,9 @@ export function regeisterElementUI () {
     XTextarea,
     Datetime,
     InlineXNumber,
-    Checklist  
+    Checklist,
+    Popup,
+    Alert 
   ]
   components.map(item => {
     Vue.component(item.name, item)

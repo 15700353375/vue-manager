@@ -5,6 +5,7 @@
  <template>
   <div class="clearfix plan-technician-container"  ref='wrapper'>
     <div class="plan-main">
+
       <div class="plan-left">
         <div class="plan-type-item" 
             v-for='(item,index) in technicianType' 
@@ -28,32 +29,44 @@
         </div>
         <div class="noMoreData">没有更多了~</div>
       </div>
+
     </div>
+
     <div class="plan-bottom" @click='seeAll'>
-      已点服务<span v-if='chooseList.length'>({{chooseList.length}})</span>
-
-      <div class="chooseList">
-        <div class="chooseTitle">
-          <span class="titStyle"></span>
-          已点服务列表
-          <span class="clear" @click='clearChoose'>清空</span>
-        </div>
-        <div class="chooseItem" 
-            v-for='(item,index) in chooseList' 
-            :key='index'>
-          <span class="long">{{item.label}}</span>
-          <span class="short">{{item.male ? '男:'+item.male : ''}}{{item.female ? '女:'+item.female : ''}}{{item.numberValue ? '随机:'+item.numberValue : ''}}</span>
-          <span class="item-price short">￥{{item.money}}</span>
-          <span class="short">{{item.timer}}</span>
-        </div>
-        <div class="noMoreData" v-if='!chooseList || !chooseList.length'>还没有点单额，快去选择商品吧~</div>
-      </div>
+      已点服务<span v-if='chooseList.length'>({{chooseList.length}})</span>      
     </div>
 
+    <div v-transfer-dom>
+      <popup v-model="isShowShop" is-transparent>
+        <div class="chooseList">
+          <div class="chooseTitle">
+            <span class="titStyle"></span>
+            已点服务列表
+            <span class="clear" @click='clearChoose'>清空</span>
+          </div>
+          <div class="list_box">
+            <div class="chooseItem" 
+                v-for='(item,index) in chooseList' 
+                :key='index'>
+              <span class="long">{{item.label}}</span>
+              <span class="short">
+                {{item.male ? '男:'+item.male : ''}}{{item.female ? '女:'+item.female : ''}}{{item.numberValue ? '随机:'+item.numberValue : ''}}
+              </span>
+              <span class="item-price short">￥{{item.money}}</span>
+              <span class="short">{{item.timer}}</span>
+            </div>
+            <div class="noMoreData" v-if='!chooseList || !chooseList.length'>还没有点单额，快去选择商品吧~</div>
+          </div>
+        </div>
+      </popup>
+    </div>
+
+    <!-- 选择技师 -->
     <chooseTechnician v-if='isChoose'
         @dialogClose='dialogClose($event)'
         :operObj='operObj'>
     </chooseTechnician>
+
   </div>
 </template>
 
@@ -62,6 +75,7 @@ import chooseTechnician from '@Components/chooseTechnician'
   export default {
     data(){
       return{
+        // 左侧项目类别
         technicianType: [
           {
             label: '全部',
@@ -84,11 +98,10 @@ import chooseTechnician from '@Components/chooseTechnician'
             value: 5
           }
         ],
+        // 当前类别
         currentType: 1,
 
-        isChoose: false,
-        operObj: null,
-
+        // 全部
         AllList: [
           {
             label: '至尊遇阻贵宾间2',
@@ -131,30 +144,32 @@ import chooseTechnician from '@Components/chooseTechnician'
             type: 5
           },
         ],
-
+        // 右侧列表
         list: [],
 
+        // 选择技师弹窗开关
+        isChoose: false,
+        // 当前操作
+        operObj: null,
+        
+        // 是否显示已选技师
+        isShowShop: false,
+        // 已选
         chooseList: [
-          {
-            female: 1,
-            label: "至尊遇阻贵宾间2",
-            male: 0,
-            money: 198,
-            numberValue: 0,
-            timer: "100分钟"
-          },
-          {
-            female: 1,
-            label: "至尊贵宾间2",
-            male: 1,
-            money: 298,
-            numberValue: 0,
-            timer: "100分钟"
-          }
-        ],
+          // {
+          //   female: 1,
+          //   label: "至尊遇阻贵宾间2",
+          //   male: 0,
+          //   money: 198,
+          //   numberValue: 0,
+          //   timer: "100分钟"
+          // },
+        ]      
       }
     },
     watch:{
+
+      // 左侧类型切换-前端筛选列表
       currentType(newVal, oldVal){
         if(newVal != oldVal){
           if(newVal != 1){
@@ -170,6 +185,7 @@ import chooseTechnician from '@Components/chooseTechnician'
       let roomId = this.$route.query.id
       console.log(this.$route.query.id)
 
+      // 默认全部
       this.list = this.AllList
     },
     methods: {
@@ -177,12 +193,14 @@ import chooseTechnician from '@Components/chooseTechnician'
       chooseType(data){
         this.currentType = data.value
       },
+
       // 选择技师
       chooseTechnician(data){
         this.operObj = data
         this.isChoose = true
       },
 
+      // 选择技师弹窗关闭
       dialogClose(event){
         this.isChoose=false
         if(event){
@@ -190,15 +208,28 @@ import chooseTechnician from '@Components/chooseTechnician'
           console.log(event)
         }
       },
+
+      // 查看已选技师
       seeAll(){
-        
+        this.isShowShop = true
       },
+      
+      // 清空已选
       clearChoose(){
         if(!this.chooseList || !this.chooseList.length){
           return
         }
         // 提示
-        this.chooseList = []
+        this.$vux.confirm.show({
+          title: '提示',
+          content: '确认清空吗？',
+          onCancel : () => {
+            console.log('取消') //当前 vm
+          },
+          onConfirm : () => {
+            this.chooseList = []
+          }
+        })
       }
     },
     components:{

@@ -9,6 +9,21 @@ import registerAxios from '@Util/registerAxios'
 import directive from '@Util/directive'
 // 环境配置
 Vue.config.productionTip = false
+// import './src/assets/vendor.js'
+
+// font样式
+// import './src/assets/fonts/iconfont.css'
+
+// import './src/assets/css/common.less'
+// import './src/assets/css/bottomBar.less'
+// import './src/assets/css/menu.less'
+// import './src/assets/css/memberInfo.less'
+// import './src/assets/css/mine.less'
+// import './src/assets/css/technician.less'
+// import './src/assets/css/technicianInfo.less'
+// import './src/assets/css/room.less'
+// import './src/assets/css/getRoom.less'
+// import './src/assets/css/planTechnician.less'
 
 import {
   regeisterElementUI,
@@ -19,6 +34,9 @@ regeisterElementUI()
 import vSelect from 'vue-select'
 Vue.component('v-select', vSelect)
 import 'vue-select/dist/vue-select.css';
+
+import  { ConfirmPlugin } from 'vux'
+Vue.use(ConfirmPlugin)
 
 Vue.use(VueRouter)
 

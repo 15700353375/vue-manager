@@ -6,12 +6,17 @@ var CopyWebpackPlugin = require("copy-webpack-plugin");
 var baseWebpackConfig = require('./webpack.base.conf');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-
+var ROOT_PATH = path.resolve(__dirname,'../');
+var SRC_PATH = path.resolve(ROOT_PATH,'src');
 var config = require('../config');
 var utils = require('./utils');
 var env = config.build.env;
 
 var webpackConfig = merge(baseWebpackConfig,{
+  // entry: {
+  //   app:  path.join(ROOT_PATH,'/main.js'),
+  //   css: path.join(SRC_PATH,'/assets/vendor.js')
+  // },
    //输出文件名
   output: {
     filename: utils.assetsPath('js/[name].[chunkhash].js'),

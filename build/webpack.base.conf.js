@@ -2,7 +2,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var merge = require('webpack-merge');
-
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 //路径为文件夹，自动引入index文件
 var config = require('../config');
 var utils = require('./utils')
@@ -77,6 +77,18 @@ const webpackConfig = {
       }
     ]
   },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: ROOT_PATH + '/index.html',
+      inject: 'body',
+      minify: {
+        removeComments: true,//移除注释
+        removeAttributeQuotes: true//移除双引号
+      },
+      chunksSortMode: 'dependency'//排序方式
+    })
+  ]
 
   // externals: {
   //   'weui': 'weui',
