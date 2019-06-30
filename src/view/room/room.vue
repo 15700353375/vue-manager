@@ -213,9 +213,9 @@
         menus2: {
           planTechnician: '安排技师',
           goodsOrder: '商品点单',
-          menu3: '显示详情',
-          menu4: '备注',
-          menu5: '结账',
+          // menu3: '显示详情',
+          changeRemark: '备注',
+          settleAccounts: '结账',
         },
 
       }

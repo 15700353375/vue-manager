@@ -13,6 +13,8 @@ const test = r => require.ensure([], () => r(require('@Src/view/test')), 'test')
 const getRoom = r => require.ensure([], () => r(require('@Src/view/room/getRoom')), 'getRoom')
 const planTechnician = r => require.ensure([], () => r(require('@Src/view/room/planTechnician')), 'planTechnician')
 const goodsOrder = r => require.ensure([], () => r(require('@Src/view/room/goodsOrder')), 'goodsOrder')
+const settleAccounts = r => require.ensure([], () => r(require('@Src/view/room/settleAccounts')), 'settleAccounts')
+const changeRemark = r => require.ensure([], () => r(require('@Src/view/room/changeRemark')), 'changeRemark')
 
 export default [
   {
@@ -86,7 +88,23 @@ export default [
     meta: {
       title: '商品点单'
     }
+  },
+  {
+    path: '/settleAccounts',
+    name: 'settleAccounts',
+    component: settleAccounts,
+    meta: {
+      title: '结账'
+    }
   },  
+  {
+    path: '/changeRemark',
+    name: 'changeRemark',
+    component: changeRemark,
+    meta: {
+      title: '结账'
+    }
+  },    
   {
     path: '/test',
     name: 'test',
