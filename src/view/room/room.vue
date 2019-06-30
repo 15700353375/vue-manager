@@ -212,7 +212,7 @@
         // 已开房
         menus2: {
           planTechnician: '安排技师',
-          menu2: '商品点单',
+          goodsOrder: '商品点单',
           menu3: '显示详情',
           menu4: '备注',
           menu5: '结账',

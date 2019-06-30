@@ -4,22 +4,28 @@
  -->
  <template>
   <div class="clearfix get-room-container"  ref='wrapper'>
-    <group  label-width="5em" label-margin-right="2em" label-align="justify">
-      <x-input title="包厢名称:" v-model="username"></x-input>
+    <group  label-width="7em" label-margin-right="1em" label-align="justify">
+      <x-input title="包厢名称:" v-model="params.username"></x-input>
       <!-- <datetime title="开台时间:" v-model="timer" format="YYYY-MM-DD HH:mm" value-text-align="left"></datetime> -->
-      <datetime v-model="timer" format="YYYY-MM-DD HH:mm" :minute-list="['00', '15', '30', '45']" @on-change="change" title="开台时间:"></datetime>
-      <x-number title="人数:" align="left" v-model="numberValue" :min="1" :max="100"></x-number>      
+      <datetime v-model="params.startTime" format="YYYY-MM-DD HH:mm" :minute-list="['00', '15', '30', '45']" title="开台时间:"></datetime>
+      <datetime v-if='roomType == 1' v-model="params.endTime" format="YYYY-MM-DD HH:mm" :minute-list="['00', '15', '30', '45']" title="预计结束时间:"></datetime>
+      <x-number title="人数:"  v-model="params.numberValue" :min="1" :max="100"></x-number>    
+      <cell v-if='roomType == 1' title="计费类型" class="cost_select">
+        <div class="cost_select_main">
+          <v-select v-model="params.select1" :options="selectArray"></v-select>
+        </div>
+      </cell>
     </group>
 
-    <group class="addNumber" label-width="5em" label-margin-right="2em" label-align="justify">
-      <x-input title="添加手牌:" v-model="number">        
-      </x-input>
-      <button>添加</button>
+    <group v-if='roomType == 2' label-width="5em" label-margin-right="1em" label-align="justify">
+      <div class="addNumber">
+        <x-input title="添加手牌:" v-model="params.number"></x-input>
+        <button @click='add'>添加</button>
+      </div>
     </group>
-      <!-- <inline-x-number width="50px" title="人数" align="left" v-model="numberValue" button-style="round" :min="1" :max="100"></inline-x-number> -->
 
     <group title="备注信息">
-      <x-textarea :max="200" name="detail" placeholder="请详细描述你的问题" :show-counter="false"></x-textarea>
+      <x-textarea :max="200" v-model='params.desc' name="detail" placeholder="请详细描述你的问题" :show-counter="false"></x-textarea>
     </group>
 
     <div class='oper'>
@@ -32,10 +38,27 @@
   export default {
     data(){
       return{
-        username: '',
-        numberValue: 1,
-        timer: '',
-        number: '',
+        params: {
+          username: '',
+          numberValue: 1,
+          startTime: '',
+          endTime: '',
+          number: '',
+          select1: '计时',
+          desc: ''
+        },
+
+        // 计费类型
+        selectArray:[
+          {
+            value: 1,
+            label: "计时"
+          },
+          {
+            value: 2,
+            label: "包段"
+          }
+        ],
 
         roomType: 1, //1为棋牌 2为其它
       }
@@ -46,11 +69,18 @@
       console.log(this.$route.query.id)
     },
     methods: {
+      // 添加手牌
+      add(){
+
+      },
+
+      // 确认提交
       open(){
-        if(!this.username){
+        if(!this.params.username){
           this.bottomToast('请输入包厢名称')
           return
         }
+        console.log(this.params)
         this.$router.push({name: 'room'})
       }
     },

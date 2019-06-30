@@ -51,7 +51,7 @@ const webpackConfig = {
       {
         test: /\.vue$/,
         loader: "vue-loader",
-        options: vueLoaderConfig,
+        options: process.env.NODE_ENV === 'production' ?  {} : vueLoaderConfig,
         // include: SRC_PATH
       },
       {

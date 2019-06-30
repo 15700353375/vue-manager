@@ -24,7 +24,8 @@ import {
   InlineXNumber,
   Checklist,
   Popup,
-  Alert
+  Alert,
+  Badge
 } from 'vux'
 
 export function regeisterElementUI () {
@@ -51,7 +52,8 @@ export function regeisterElementUI () {
     InlineXNumber,
     Checklist,
     Popup,
-    Alert 
+    Alert,
+    Badge
   ]
   components.map(item => {
     Vue.component(item.name, item)

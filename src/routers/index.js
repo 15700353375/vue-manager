@@ -12,6 +12,7 @@ const memberInfo = r => require.ensure([], () => r(require('@Src/view/menu/membe
 const test = r => require.ensure([], () => r(require('@Src/view/test')), 'test')
 const getRoom = r => require.ensure([], () => r(require('@Src/view/room/getRoom')), 'getRoom')
 const planTechnician = r => require.ensure([], () => r(require('@Src/view/room/planTechnician')), 'planTechnician')
+const goodsOrder = r => require.ensure([], () => r(require('@Src/view/room/goodsOrder')), 'goodsOrder')
 
 export default [
   {
@@ -78,6 +79,14 @@ export default [
       title: '安排技师'
     }
   },
+  {
+    path: '/goodsOrder',
+    name: 'goodsOrder',
+    component: goodsOrder,
+    meta: {
+      title: '商品点单'
+    }
+  },  
   {
     path: '/test',
     name: 'test',
