@@ -8,20 +8,7 @@
 
 <div class="technician-main">
   <div class="technician-search">
-      <!-- <search
-      @result-click="resultClick"
-      @on-change="getResult"
-      :results="results"
-      v-model="value"
-      position="absolute"
-      auto-scroll-to-top
-      top="0px"
-      @on-focus="onFocus"
-      @on-cancel="onCancel"
-      @on-submit="onSubmit"
-      ref="search"></search> -->
-
-    <search @result-click="resultClick" :auto-fixed='true' @on-change="getResult" :results="results" v-model="searchVal"></search>
+    <search @result-click="resultClick"  :auto-fixed='true' @on-change="getResult" :results="results" v-model="searchVal"></search>
   </div>
 
   <scroller use-pulldown :pulldown-config="pulldownDefaultConfig" @on-pulldown-loading="refresh"
@@ -114,7 +101,7 @@
     props: ['currentData'],
     data() {
       return {
-        results: [{title: 'hello', key: '123'}],
+        results: [],
         searchVal: '',
 
         isInfoShow: false,
@@ -143,6 +130,8 @@
         currentInfo: {},
 
         listData: [],
+
+        allData: []
 
       }
     },
@@ -177,6 +166,11 @@
         this.$ajaxPost(urls.GETTECHNICIANQUEUE, params).then(res => {
           if(res){
             this.listData = res.data
+            this.listData.forEach(item => {
+              if(item.all_queue && item.all_queue.length){
+                this.allData = _.concat(this.allData, item.all_queue)
+              }
+            })
             setTimeout(()=>{
               this.$refs.scrollerBottom.donePulldown()
             }, 1000)
@@ -216,16 +210,21 @@
         this.$refs.search.setFocus()
       },
       resultClick(item){
-         localStorage.setItem("goodname", this.value)
+        this.operObj = item
+        this.isInfoShow = true
+        //  localStorage.setItem("goodname", this.value)
         //  window.location.href="/list"
       },
       getResult(val){
-          console.log(val)
+        let results = _.filter(this.allData, (o)=>{return o.number.indexOf(val) > -1})
+        results.forEach(item =>{
+          item['title'] = item.number
+          this.results.push(item)
+        })
       },
 
       // 单独点击时
       operItem(item){
-        console.log(item)
         this.operObj = item
         this.isShowPop = true
       },
