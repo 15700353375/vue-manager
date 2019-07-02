@@ -9,8 +9,8 @@
 <div class='room-container'>
   <div class='clearfix select-main'>
     <div class="custom_input">
-      <v-select v-model="select1" :options="selectArray"></v-select>
-      <v-select v-model="select2" :options="selectArray2"></v-select>
+      <v-select v-model="select1" :options="selectArray"  :searchable="false"></v-select>
+      <v-select v-model="select2" :options="selectArray2" :searchable="false"></v-select>
     </div>
   </div>
 
