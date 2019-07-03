@@ -33,7 +33,8 @@
               </div>
               <div class="item-top-right">
                 <!-- <span v-if="item.finishWorkWillPauseFlag == 0" class='iconfont icon-gengduomore12'></span> -->
-                <span v-if="item.finishWorkWillPauseFlag == 1" class='iconfont icon-tianchongxing-'></span>
+                <span v-if="item.finishWorkNextStatus == 1" class='iconfont icon-tianchongxing-'></span>
+                <span v-else-if="item.finishWorkNextStatus == 2" class='iconfont icon-yuyue'></span>
               </div>
             </div>
             <div class="item-center">

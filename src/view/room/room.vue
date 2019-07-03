@@ -19,13 +19,13 @@
       <div class='list-item' v-for='(item,index) in listData' :key='index' @click='operItem(item)'>
 
         <!-- 顶部 -->
-        <div v-if="dealClass(item.roomStatus,item)" class='list-item-top' :class="dealClass(item.roomStatus, item) ? 'active'+(item.roomOrder.billBatch%10) : ''">
-          {{item.roomOrder.billBatch || ''}} {{item.roomName}}
+        <div v-if="isUsed(item.roomStatus,item)" class='list-item-top' :class="dealClass(item.roomStatus, item) ? 'active'+(item.roomOrder.billBatch%10) : ''">
+          {{item.roomOrder.billBatch || ''}} {{roomNameCut(item.roomName)}}
           <!-- 字段：roomOrder.totalGoodsAmount,如果roomType字段值为2时，在钱后面显示+号，其他情况不显示+号 -->
-          <span v-if="item.roomOrder" class="item-top-right">￥{{item.roomOrder.totalGoodsAmount || 0}}{{item.roomType == 2 ? '+' : ''}}</span>
+          <span v-if="item.roomOrder" class="item-top-right">{{handleGoodsAmount(item.roomOrder.totalGoodsAmount,item.roomType)}}</span>
         </div>
         <div v-else class='list-item-top'>
-          {{item.roomName}}
+          {{roomNameCut(item.roomName)}}
         </div>
 
 
@@ -78,7 +78,7 @@
         <div v-else class='list-item-content clearfix' :style="{'background-color':getRoomBodyBackground(item.roomStatus)}" :class="{available:item.roomStatus=='2' || item.roomStatus=='9'}">
           <div class="kong-content clearfix">
             <div class="icon-box">
-              <img :src="item.roomStatus=='2' || item.roomStatus=='9'?'agentStatic/img/icon-free-available.png':'agentStatic/img/icon-free.png'" alt="">
+              <img :src="getRoomBodyIconUrl(item.roomStatus)" alt="">
             </div>
             <!-- 字段：seatNum，座位数，只有空闲中，需要打扫，已买单未离开状态才显示 -->
             <div class="kong-text" v-if="item.roomStatus == 2">
@@ -323,6 +323,41 @@
         return flag;
       },
 
+      isUsed(status,item){
+        if((status == 3 || status == 5 || status == 11 ||  status == 12) ){
+          return true;
+        } else{
+          return false;
+        }
+      },
+
+      roomNameCut(name){
+        var strlen = 0;
+        for(var i = 0;i < name.length; i++)
+        {
+            if(name.charCodeAt(i) > 255) //å¦ææ¯æ±å­ï¼åå­ç¬¦ä¸²é¿åº¦å 2
+                strlen += 2;
+            else
+                strlen++;
+            if(strlen>8){
+                return name.substring(0,i);
+            }
+        }
+        return name;
+      },
+
+      handleGoodsAmount(totalGoodsAmount,roomType){
+        if(roomType=='1'){
+          if(totalGoodsAmount){
+              return "¥" + Math.round(totalGoodsAmount);
+          } else{
+            return '';
+          }
+        } else{
+          let amount=(totalGoodsAmount || 0 )
+          return "¥" + Math.round(amount)+ "+";
+        }
+      },
       //房间背景
       getRoomBodyBackground(status){
         if(status=='10'){
@@ -331,6 +366,17 @@
             return '#BEDCF7'
         } else {
             return '#fff'
+        }
+      },
+
+      //房间icon url
+       getRoomBodyIconUrl(status){
+        if(status=='2'){
+          return 'agentStatic/img/icon-free-available.png';
+        } else if(status=='9'){
+          return 'agentStatic/img/icon-clear.png';
+        } else{
+          return 'agentStatic/img/icon-free.png'
         }
       },
 
