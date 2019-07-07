@@ -335,7 +335,7 @@
         var strlen = 0;
         for(var i = 0;i < name.length; i++)
         {
-            if(name.charCodeAt(i) > 255) //å¦ææ¯æ±å­ï¼åå­ç¬¦ä¸²é¿åº¦å 2
+            if(name.charCodeAt(i) > 255)
                 strlen += 2;
             else
                 strlen++;
