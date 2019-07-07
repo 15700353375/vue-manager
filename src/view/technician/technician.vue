@@ -8,7 +8,7 @@
 
 <div class="technician-main">
   <div class="technician-search">
-    <search @result-click="resultClick"  :auto-fixed='true' @on-change="getResult" :results="results" v-model="searchVal"></search>
+    <search @on-submit="resultClick"  :auto-fixed='false' @on-change="getResult" :results="results" v-model="searchVal"></search>
   </div>
 
   <scroller use-pulldown :pulldown-config="pulldownDefaultConfig" @on-pulldown-loading="refresh"
@@ -33,7 +33,8 @@
               </div>
               <div class="item-top-right">
                 <!-- <span v-if="item.finishWorkWillPauseFlag == 0" class='iconfont icon-gengduomore12'></span> -->
-                <span v-if="item.finishWorkWillPauseFlag == 1" class='iconfont icon-tianchongxing-'></span>
+                <span v-if="item.finishWorkNextStatus == 1" class='iconfont icon-tianchongxing-'></span>
+                <span v-else-if="item.finishWorkNextStatus == 2" class='iconfont icon-yuyue'></span>
               </div>
             </div>
             <div class="item-center">
@@ -210,7 +211,10 @@
         this.$refs.search.setFocus()
       },
       resultClick(item){
-        this.operObj = item
+        
+        // todo，请求后台查询出技师信息
+        console.debug(item)
+        this.operObj.number = item
         this.isInfoShow = true
         //  localStorage.setItem("goodname", this.value)
         //  window.location.href="/list"

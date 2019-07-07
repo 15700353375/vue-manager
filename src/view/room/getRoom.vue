@@ -12,7 +12,7 @@
       <x-number title="人数:"  v-model="params.numberValue" :min="1" :max="100"></x-number>    
       <cell v-if='roomType == 1' title="计费类型" class="cost_select">
         <div class="cost_select_main">
-          <v-select v-model="params.select1" :options="selectArray"></v-select>
+          <v-select v-model="params.select1" :options="selectArray" :searchable="false"></v-select>
         </div>
       </cell>
     </group>
