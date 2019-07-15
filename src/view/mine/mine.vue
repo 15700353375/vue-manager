@@ -55,7 +55,7 @@
       }
     },
     created(){
-      comUtil.getWxInfo()
+      
     },
     mounted(){
       let userInfo = localStorage.getItem('userInfo')

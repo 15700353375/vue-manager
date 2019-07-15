@@ -8,16 +8,16 @@
       <x-input title="包厢名称:" v-model="params.username"></x-input>
       <!-- <datetime title="开台时间:" v-model="timer" format="YYYY-MM-DD HH:mm" value-text-align="left"></datetime> -->
       <datetime v-model="params.startTime" format="YYYY-MM-DD HH:mm" :minute-list="['00', '15', '30', '45']" title="开台时间:"></datetime>
-      <datetime v-if='roomType == 1' v-model="params.endTime" format="YYYY-MM-DD HH:mm" :minute-list="['00', '15', '30', '45']" title="预计结束时间:"></datetime>
+      <datetime v-if='room.roomType == 2' v-model="params.endTime" format="YYYY-MM-DD HH:mm" :minute-list="['00', '15', '30', '45']" title="预计结束时间:"></datetime>
       <x-number title="人数:"  v-model="params.numberValue" :min="1" :max="100"></x-number>    
-      <cell v-if='roomType == 1' title="计费类型" class="cost_select">
+      <cell v-if='room.roomType == 2' title="计费类型" class="cost_select">
         <div class="cost_select_main">
           <v-select v-model="params.select1" :options="selectArray" :searchable="false"></v-select>
         </div>
       </cell>
     </group>
 
-    <group v-if='roomType == 2' label-width="5em" label-margin-right="1em" label-align="justify">
+    <group v-if='room.roomType == 1' label-width="5em" label-margin-right="1em" label-align="justify">
       <div class="addNumber">
         <x-input title="添加手牌:" v-model="params.number"></x-input>
         <button @click='add'>添加</button>
@@ -59,14 +59,16 @@
             label: "包段"
           }
         ],
-
-        roomType: 1, //1为棋牌 2为其它
+        room:{
+          roomType:"1",
+          roomId:null
+        }
       }
     },
     mounted(){
-      // 从房间页面传递过来的id
-      let roomId = this.$route.query.id
-      console.log(this.$route.query.id)
+      // 从房间页面传递过来的room信息
+      this.room=this.$route.query
+      console.log(this.$route.query)
     },
     methods: {
       // 添加手牌

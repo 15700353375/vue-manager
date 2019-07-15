@@ -24,6 +24,7 @@ import {
   InlineXNumber,
   Checklist,
   Popup,
+  PopupHeader,
   Alert,
   Badge
 } from 'vux'
@@ -52,6 +53,7 @@ export function regeisterElementUI () {
     InlineXNumber,
     Checklist,
     Popup,
+    PopupHeader,
     Alert,
     Badge
   ]

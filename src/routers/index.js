@@ -19,7 +19,7 @@ const changeRemark = r => require.ensure([], () => r(require('@Src/view/room/cha
 export default [
   {
     path: '/',
-    redirect: '/mine'
+    redirect: '/room'
   },
   {
     path: '/room',

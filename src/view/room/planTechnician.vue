@@ -114,7 +114,7 @@ import chooseTechnician from '@Components/chooseTechnician'
             type: 2
           },
           {
-            label: '针灸遇阻标准间3',
+            label: '小项目服务',
             value: 299,
             type: 3
           },

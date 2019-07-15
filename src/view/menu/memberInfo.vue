@@ -7,18 +7,18 @@
     <div class="member-search">
       <div class="menber-search-main">
         <div class="search-label" v-clickoutside>
-          <span>{{currentSearchType}}</span>
+          <span>{{dealSearchText(currentSearchType)}}</span>
           <div class="my-popover" id="my-popover" placement="bottom">
             <div class="my-poptip-arrow"><span></span></div>
             <div class="my-popover-content">
               <group>
-                <cell-box @click.native='searchType("手机号")'>
+                <cell-box @click.native='searchType("1")'>
                   手机号
                 </cell-box>
-                <cell-box @click.native='searchType("卡号")'>
+                <cell-box @click.native='searchType("2")'>
                   卡号
                 </cell-box>
-                <cell-box @click.native='searchType("姓名")'>
+                <cell-box @click.native='searchType("3")'>
                   姓名
                 </cell-box>
               </group>
@@ -39,14 +39,14 @@
         <div class="item-top">
           <img src="agentStatic/img/11.jpg" alt="">
           <div class="item-top-right">
-            <span class="item-type">{{item.type}}</span>
-            <div class="item-tit">{{item.title}}</div>
+            <span class="item-type">{{item.cardTypeName}}</span>
+            <div class="item-tit">{{item.cardNumber}}</div>
             <div class="item-name"> <i class="iconfont icon-ren"></i> {{item.name}}</div>
-            <div class="item-tel"> <i class="iconfont icon-dianhua"></i>  {{item.phone}}</div>
+            <div class="item-tel text-ellipsis"> <i class="iconfont icon-dianhua"></i>  {{item.phone}}</div>
           </div>
         </div>
         <div class="item-bottom">
-            <cell title="卡内余额" :value="item.money"></cell>
+            <cell title="卡内余额" :value="item.balance"></cell>
         </div>
       </div>
     </div>
@@ -54,10 +54,11 @@
 </template>
 
 <script>
+  import {urls} from '@Util/axiosConfig';
   export default {
     data(){
       return{
-        currentSearchType: '手机号',
+        currentSearchType: '1',
         inputVal: '',
 
         AllList:[
@@ -106,12 +107,25 @@
 
       }
     },
+    created(){
+      let currentInfo = localStorage.getItem('currentInfo')
+      this.currentInfo = JSON.parse(currentInfo)
+    },
     mounted(){
     },
     methods: {
       // 搜索类型
       searchType(flag){
-        this.currentSearchType = flag
+        this.currentSearchType=flag
+      },
+      dealSearchText(flag){
+        let text=''
+        switch(flag){
+          case '1':text='手机';break;
+          case '2':text='卡号';break;
+          case '3':text='姓名';break;
+        }
+        return text;
       },
       // 查询
       search(){
@@ -120,19 +134,24 @@
           return
         }
 
-        if(this.currentSearchType == '手机号'){
-          this.list = _.filter(this.AllList, ['phone', this.inputVal])
-          return
-        }
-        if(this.currentSearchType == '姓名'){
-          this.list = _.filter(this.AllList, ['name', this.inputVal])
-          return
-        }
-        if(this.currentSearchType == '卡号'){
-          this.list = _.filter(this.AllList, ['id', this.inputVal])
-          return
-        }
-
+        // if(this.currentSearchType == '手机号'){
+        //   this.list = _.filter(this.AllList, ['phone', this.inputVal])
+        //   return
+        // }
+        // if(this.currentSearchType == '姓名'){
+        //   this.list = _.filter(this.AllList, ['name', this.inputVal])
+        //   return
+        // }
+        // if(this.currentSearchType == '卡号'){
+        //   this.list = _.filter(this.AllList, ['id', this.inputVal])
+        //   return
+        // }
+        let param={searchParam:this.inputVal,type:this.currentSearchType,holderId:this.currentInfo.holderId}
+        this.$ajaxPost(urls.FINDVIPINFOBYTYPE,param).then(res=>{
+          if(res){
+            this.list=res.data
+          }
+        })
       }
 
     },

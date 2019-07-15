@@ -238,6 +238,7 @@
       }
     },
     created(){
+      comUtil.getWxInfo()
       let currentInfo = localStorage.getItem('currentInfo')
       this.currentInfo = JSON.parse(currentInfo)
 
@@ -414,7 +415,13 @@
       },
 
       showModal(e){
-        this.$router.push({name: e, query: {id: this.operObj.roomId}})
+        let needSendArray=['roomId','roomType','roomStatus','roomName','remark','roomOrder']
+        let room={}
+        for(let filed of needSendArray){
+          room[filed]=this.operObj[filed];
+        }
+        // this.$router.push({name: e, query: {roomId:this.operObj.roomId,roomId:this.operObj.roomId,roomId:this.operObj.roomId,roomId:this.operObj.roomId,roomId:this.operObj.roomId,}})
+        this.$router.push({name: e, query: room})
         // planTechnician
       },
 

@@ -8,7 +8,7 @@
 
 <div class="technician-main">
   <div class="technician-search">
-    <search @on-submit="resultClick"  :auto-fixed='false' @on-change="getResult" :results="results" v-model="searchVal"></search>
+    <search @on-submit="resultClick"  :auto-fixed='false' ref="search" @on-change="getResult" :results="results" v-model="searchVal"></search>
   </div>
 
   <scroller use-pulldown :pulldown-config="pulldownDefaultConfig" @on-pulldown-loading="refresh"
@@ -216,6 +216,8 @@
         console.debug(item)
         this.operObj.number = item
         this.isInfoShow = true
+        this.$refs.search.setBlur()
+
         //  localStorage.setItem("goodname", this.value)
         //  window.location.href="/list"
       },
